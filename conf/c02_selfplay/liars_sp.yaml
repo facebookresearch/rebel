@@ -1,0 +1,43 @@
+defaults:
+  - optimizer: adam
+seed: 0
+decrease_lr_every: 400
+decrease_lr_times: 2
+grad_clip: 5.0
+env:
+  num_dice: 1
+  num_faces: 4
+  random_action_prob: 0.25
+  sample_leaf: true
+  subgame_params:
+    num_iters: 1024
+    max_depth: 2
+    linear_update: true
+exploit: true
+selfplay:
+  network_sync_epochs: 1
+  dump_dataset_every_epochs: 200
+  threads_per_gpu: -1
+  models_per_gpu: 1
+  cpu_gen_threads: 60
+train_gen_ratio: 4
+task: selfplay
+loss: huber
+min_buffer_to_send: 2500
+max_epochs: 10000
+model:
+  name: Net2
+  kwargs:
+    n_hidden: 256
+    n_layers: 2
+    use_layer_norm: true
+create_validation_set_every: 100
+data:
+  train_epoch_size: 25600
+  train_batch_size: 512
+replay:
+  capacity: 2000000
+  alpha: 1.0
+  beta: 1.0
+  prefetch: 8
+  use_priority: false

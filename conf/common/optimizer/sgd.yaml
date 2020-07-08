@@ -1,0 +1,5 @@
+optimizer:
+  classname: 'SGD'
+  kwargs:
+    lr: 1e-3
+    momentum: 0.9

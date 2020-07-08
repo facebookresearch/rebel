@@ -1,0 +1,6 @@
+build/
+cfvpy/.ipynb_checkpoints
+cfvpy/rela*.so
+^exps/
+strategy*.txt
+__pycache__/

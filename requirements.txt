@@ -1,0 +1,12 @@
+ipython
+black==19.10b0
+torch==1.4.0
+tqdm
+
+# HeyHi
+pandas
+omegaconf==1.4.1
+nose
+-e git+git@github.com:akhti/hydra.git#egg=hydra
+-e git+git@github.com:akhti/pytorch-lightning.git#egg=pytorch-lightning
+submitit

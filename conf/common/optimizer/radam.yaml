@@ -1,0 +1,4 @@
+optimizer:
+  classname: 'hey.optimizers.RAdam'
+  kwargs:
+    lr: 3e-4

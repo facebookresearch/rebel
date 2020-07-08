@@ -1,0 +1,4 @@
+optimizer:
+  classname: 'Adam'
+  kwargs:
+    lr: 3e-4

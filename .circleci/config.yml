@@ -1,0 +1,74 @@
+version: 2
+jobs:
+  build-and-test:
+    docker:
+      - image: ubuntu:bionic-20190612
+    steps:
+      - checkout
+      # Install conda.
+      - run:
+         command: |
+          apt-get update
+          apt-get install build-essential wget git --yes
+          wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-4.7.10-Linux-x86_64.sh
+          mkdir ~/.conda
+          bash Miniconda3-4.7.10-Linux-x86_64.sh -b -p /opt/conda
+          rm Miniconda3-4.7.10-Linux-x86_64.sh
+          ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh
+          echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc
+          echo "conda activate base" >> ~/.bashrc
+          find /opt/conda/ -follow -type f -name '*.a' -delete
+          find /opt/conda/ -follow -type f -name '*.js.map' -delete
+          /opt/conda/bin/conda clean -afy
+          . /opt/conda/etc/profile.d/conda.sh
+          conda info --envs
+      - run:
+         command: |
+           . /opt/conda/etc/profile.d/conda.sh
+           conda create --yes -n games python=3.7
+           conda init bash && . ~/.bashrc && conda activate games
+
+           # ci-hack: Install from conda to get cpu only version.
+           conda install pytorch==1.4 cpuonly -c pytorch --yes
+           # ci-hack: To make deps on github work.
+           mkdir -p ~/.ssh/
+           ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
+
+           pip install -r requirements.txt
+           conda install cmake
+           git submodule update --init
+           make compile_slow
+           make test
+
+           # Check that all imports work.
+           python run.py --help
+
+  clang:
+    docker:
+      - image: ubuntu:bionic-20190612
+    steps:
+      - checkout
+      - run:
+         command: |
+            apt-get update
+            apt-get install clang-format-8 git -y
+            ./scripts/clang_format_all.sh
+            git diff --exit-code
+
+  black:
+    docker:
+      - image: continuumio/miniconda3:4.6.14
+    steps:
+      - checkout
+      - run:
+         command: |
+            pip install black==19.10b0
+            black --check --diff run.py heyhi/ cfvpy/
+
+workflows:
+  version: 2
+  rebel:
+    jobs:
+      - build-and-test: {}
+      - clang: {}
+      - black: {}
