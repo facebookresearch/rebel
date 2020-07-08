@@ -1,6 +1,6 @@
 # ReBeL
 
-Implementation of ReBeL, an algorithm that generalizes the paradigm of self-play reinforcement learning and search to imperfect-information games.
+Implementation of [ReBeL](https://arxiv.org/abs/2007.13544), an algorithm that generalizes the paradigm of self-play reinforcement learning and search to imperfect-information games.
 
 # Installation
 
@@ -71,4 +71,10 @@ Rebel is released under the Apache license. See [LICENSE](LICENSE) for additiona
 # Citation
 
 ```bibtex
+@article{brown2020combining,
+    title={Combining Deep Reinforcement Learning and Search for Imperfect-Information Games},
+    author={Noam Brown and Anton Bakhtin and Adam Lerer and Qucheng Gong},
+    year={2020},
+    journal={arXiv:2007.13544}
+}
 ```
