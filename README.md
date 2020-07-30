@@ -1,8 +1,9 @@
 # ReBeL
 
 Implementation of [ReBeL](https://arxiv.org/abs/2007.13544), an algorithm that generalizes the paradigm of self-play reinforcement learning and search to imperfect-information games.
+This repository contains implementation only for [Lair's Dice](https://en.wikipedia.org/wiki/Liar%27s_dice) game.
 
-# Installation
+## Installation
 
 The recommended way to install ReBeL is via conda env.
 
@@ -20,7 +21,7 @@ Then, compile the C++ part:
 make
 ```
 
-# Training a value net
+## Training a value net
 
 Use the following command to train a value net:
 
@@ -35,7 +36,7 @@ python run.py --adhoc --cfg conf/c02_selfplay/liars_sp.yaml \
 Check the config [conf/c02_selfplay/liars_sp.yaml](conf/c02_selfplay/liars_sp.yaml) for all possible parameters. If use use Slurm to manage the cluster, add `launcher=slurm` to run the job on the cluster.
 
 
-# Evaluating a value net
+## Evaluating a value net
 
 The trainer saves checkpoints every 10 epochs as state dictionaries and as TorchScript modules. You can use the latter to compute exploitability of strategy produced with such a model using the following command:
 
@@ -56,19 +57,19 @@ Setting `--num_repeats` to a positive value enables evaluation of a sampled poli
 The script reports exploitability for both full tree solving and recursive solving.
 
 
-# Pretrained checkpoints
+## Pretrained checkpoints
 
 We release checkpoints of value function for games 1x4f, 1x5f, 1x6f, and 2x3f. We report the average exploitability of these checkpoints in the paper. Use [eval_all.py](https://github.com/facebookresearch/rebel/blob/master/scripts/eval_all.py) script to download and evaluate all the models.
 
-# Code structure
+## Code structure
 
 The training loop is implemented in Python and located in [cfvpy/selfplay.py](cfvpy/selfplay.py). The actual data generation part happens in C++ and could be found in [csrc/liarc_dice](csrc/liars_dice).
 
-# License
+## License
 Rebel is released under the Apache license. See [LICENSE](LICENSE) for additional details.
 
 
-# Citation
+## Citation
 
 ```bibtex
 @article{brown2020combining,
