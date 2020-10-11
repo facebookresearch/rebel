@@ -7,6 +7,6 @@ tqdm
 pandas
 omegaconf==1.4.1
 nose
--e git+git@github.com:akhti/hydra.git#egg=hydra
--e git+git@github.com:akhti/pytorch-lightning.git#egg=pytorch-lightning
+-e git+https://github.com/akhti/hydra.git#egg=hydra
+-e git+https://github.com/akhti/pytorch-lightning.git#egg=pytorch-lightning
 submitit
