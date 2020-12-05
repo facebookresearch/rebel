@@ -15,7 +15,25 @@
 #include "tree.h"
 #include <gtest/gtest.h>
 
-TEST(SubgameSolvingTest, TestUnrollDepthZero) {
+using namespace liars_dice;
+
+TEST(TreeTest, TestUnroll) {
+  const int num_dice = 1;
+  const int num_faces = 2;
+  Game game(num_dice, num_faces);
+
+  auto nodes = unroll_tree(game);
+
+  ASSERT_EQ(nodes.size(), 31);
+  EXPECT_EQ(nodes[0].get_children(), (std::vector<int>{1, 2, 3, 4}));
+  EXPECT_EQ(nodes[1].get_children(), (std::vector<int>{5, 6, 7, 8}));
+  EXPECT_EQ(nodes[2].get_children(), (std::vector<int>{9, 10, 11}));
+  EXPECT_EQ(nodes[15].get_children(), (std::vector<int>{25, 26}));
+  EXPECT_EQ(nodes[16].get_children(), (std::vector<int>{27}));
+  EXPECT_EQ(nodes[25].get_children(), (std::vector<int>{30}));
+}
+
+TEST(TreeTest, TestUnrollDepthZero) {
   const int num_dice = 2;
   const int num_faces = 6;
   Game game(num_dice, num_faces);
@@ -32,7 +50,7 @@ TEST(SubgameSolvingTest, TestUnrollDepthZero) {
   EXPECT_EQ(nodes[0].state, root);
 }
 
-TEST(SubgameSolvingTest, TestUnrollDepthOne) {
+TEST(TreeTest, TestUnrollDepthOne) {
   const int num_dice = 2;
   const int num_faces = 6;
   Game game(num_dice, num_faces);
@@ -50,7 +68,7 @@ TEST(SubgameSolvingTest, TestUnrollDepthOne) {
   EXPECT_EQ(nodes[2].parent, 0);
 }
 
-TEST(SubgameSolvingTest, TestUnrollDepthTwo) {
+TEST(TreeTest, TestUnrollDepthTwo) {
   const int num_dice = 2;
   const int num_faces = 6;
   Game game(num_dice, num_faces);
@@ -69,7 +87,7 @@ TEST(SubgameSolvingTest, TestUnrollDepthTwo) {
   EXPECT_EQ(nodes[3].parent, 1);
 }
 
-TEST(SubgameSolvingTest, TestUnrollDepthTwoDeep) {
+TEST(TreeTest, TestUnrollDepthTwoDeep) {
   const int num_dice = 2;
   const int num_faces = 6;
   Game game(num_dice, num_faces);
@@ -86,7 +104,7 @@ TEST(SubgameSolvingTest, TestUnrollDepthTwoDeep) {
   EXPECT_EQ(nodes[2].get_children(), (std::vector<int>{6}));
 }
 
-TEST(SubgameSolvingTest, TestTreeIsBreadthFirst) {
+TEST(TreeTest, TestTreeIsBreadthFirst) {
   // Required for partial initialization to work.
   const int num_dice = 1;
   const int num_faces = 5;

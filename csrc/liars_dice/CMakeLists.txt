@@ -69,7 +69,7 @@ add_executable(liar_game_test liars_dice_test.cc)
 target_link_libraries(liar_game_test liars_dice_lib gtest_main)
 add_test(NAME liar_game COMMAND liar_game_test)
 
-add_executable(liar_tree_test liars_dice_test.cc)
+add_executable(liar_tree_test tree_test.cc)
 target_link_libraries(liar_tree_test liars_dice_lib gtest_main)
 add_test(NAME liar_tree COMMAND liar_tree_test)
 
