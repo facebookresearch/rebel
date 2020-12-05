@@ -29,7 +29,7 @@ Use the following command to train a value net:
 python run.py --adhoc --cfg conf/c02_selfplay/liars_sp.yaml \
     env.num_dice=1 \
     env.num_faces=4 \
-    env.fp.use_cfr=true \
+    env.subgame_params.use_cfr=true \
     selfplay.cpu_gen_threads=60
 ```
 
