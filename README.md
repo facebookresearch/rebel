@@ -72,7 +72,7 @@ Rebel is released under the Apache license. See [LICENSE](LICENSE) for additiona
 ## Citation
 
 ```bibtex
-@article{brown2020combining,
+@article{brown2020rebel,
   title={Combining deep reinforcement learning and search for imperfect-information games},
   author={Brown, Noam and Bakhtin, Anton and Lerer, Adam and Gong, Qucheng},
   journal={Advances in Neural Information Processing Systems},
