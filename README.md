@@ -23,7 +23,7 @@ make
 
 ## Training a value net
 
-Use the following command to train a value net:
+Use the following command to train a value net with data generation placed on CPU:
 
 ```
 python run.py --adhoc --cfg conf/c02_selfplay/liars_sp.yaml \
@@ -33,7 +33,18 @@ python run.py --adhoc --cfg conf/c02_selfplay/liars_sp.yaml \
     selfplay.cpu_gen_threads=60
 ```
 
-Check the config [conf/c02_selfplay/liars_sp.yaml](conf/c02_selfplay/liars_sp.yaml) for all possible parameters. If use use Slurm to manage the cluster, add `launcher=slurm` to run the job on the cluster.
+As CFR requires evaluation of the value function for several nodes at each iteration, the code above will be pretty slow. If you have multiple GPUs on your machine, use these flags instead. First GPU will be used for training and the others will be used for data generation with 8 CPU threads per each GPU:
+
+```
+python run.py --adhoc --cfg conf/c02_selfplay/liars_sp.yaml \
+    env.num_dice=1 \
+    env.num_faces=4 \
+    env.subgame_params.use_cfr=true \
+    selfplay.cpu_gen_threads=0  \
+    selfplay.threads_per_gpu=8
+```
+
+Check the config [conf/c02_selfplay/liars_sp.yaml](conf/c02_selfplay/liars_sp.yaml) for all possible parameters. If use use Slurm to manage the cluster, add `launcher=slurm_8gpus launcher.num_gpus=NUM_GPUS` to run the job on the cluster. If you specify `NUM_GPUS > 8`, the code will assume that you are launching on several machines with 8 GPUs each.
 
 
 ## Evaluating a value net
