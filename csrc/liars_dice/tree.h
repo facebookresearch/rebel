@@ -63,7 +63,7 @@ inline std::vector<UnrolledTreeNode> unroll_tree(const Game& game,
     for (int i = start; i < end; ++i) {
       auto state = game.act(nodes[node_id].state, i);
       nodes.push_back(
-        UnrolledTreeNode{state, 0, 0, node_id, nodes[node_id].depth + 1});
+          UnrolledTreeNode{state, 0, 0, node_id, nodes[node_id].depth + 1});
     }
   }
   return nodes;
