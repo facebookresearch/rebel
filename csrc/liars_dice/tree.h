@@ -58,14 +58,12 @@ inline std::vector<UnrolledTreeNode> unroll_tree(const Game& game,
                         nodes[node_id].depth < max_depth;
        ++node_id) {
     const auto [start, end] = game.get_bid_range(nodes[node_id].state);
-    nodes.reserve(end - start + nodes.size());
-    // No resizes beside this point.
-    auto& parent = nodes[node_id];
-    parent.children_begin = nodes.size();
-    parent.children_end = parent.children_begin + end - start;
+    nodes[node_id].children_begin = nodes.size();
+    nodes[node_id].children_end = nodes.size() + end - start;
     for (int i = start; i < end; ++i) {
-      auto state = game.act(parent.state, i);
-      nodes.push_back(UnrolledTreeNode{state, 0, 0, node_id, parent.depth + 1});
+      auto state = game.act(nodes[node_id].state, i);
+      nodes.push_back(
+          UnrolledTreeNode{state, 0, 0, node_id, nodes[node_id].depth + 1});
     }
   }
   return nodes;
