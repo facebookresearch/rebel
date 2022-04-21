@@ -62,7 +62,8 @@ jobs:
       - checkout
       - run:
          command: |
-            pip install black==19.10b0
+            # Click version is a hack for some deps issue
+            pip install black==19.10b0 click==8.0.2
             black --check --diff run.py heyhi/ cfvpy/
 
 workflows:
