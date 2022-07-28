@@ -7,17 +7,25 @@ This repository contains implementation only for [Liar's Dice](https://en.wikipe
 
 The recommended way to install ReBeL is via conda env.
 
-First, install dependencies:
+First, clone and create the conda env:
 
+```bash
+git clone --recursive https://github.com/facebookresearch/rebel.git
+cd rebel
+conda create --yes -n rebel python=3.7
+source activate rebel
 ```
+
+Then, install dependencies:
+
+```bash
 pip install -r requirements.txt
 conda install cmake
-git submodule update --init
 ```
 
-Then, compile the C++ part:
+Finally, compile the C++ part:
 
-```
+```bash
 make
 ```
 
