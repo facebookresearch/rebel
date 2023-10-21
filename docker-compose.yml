@@ -1,0 +1,5 @@
+version: "3.9"
+services:
+  REBEL_DEV:
+    build: .
+    ports: ["8000,8000"]
