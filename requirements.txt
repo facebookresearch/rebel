@@ -1,5 +1,5 @@
 ipython
-black==19.10b0
+black==24.3.0
 torch==1.4.0
 tqdm
 
